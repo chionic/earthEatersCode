@@ -68,7 +68,7 @@ public class blobClass : MonoBehaviour
             objectPoolReset(); //get blob ready for reactivation
             this.gameObject.transform.GetChild(0).gameObject.SetActive(false); //deactivate the colour icon above the blobs head
             blobPool.instance.addBlob(gameObject); //add game object to pool
-            blobPool.instance.posPositions.Add(angle);
+            blobPool.instance.posPositions.Add(angle); //
             this.gameObject.SetActive(false);
         }
     }
