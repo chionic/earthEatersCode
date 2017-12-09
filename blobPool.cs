@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class blobPool : MonoBehaviour {
-    public static blobPool instance = null;
-    public List<GameObject> blobs;
-    public List<int> posPositions = new List<int>();
+    public static blobPool instance = null; //singleton pattern instance
+    public List<GameObject> blobs; //a game object pool for the blobs
+    public List<int> posPositions = new List<int>(); //possible positions the blobs can have on the earth
 
     //create a singleton pattern for the tiles function, makes it easy to call from anywhere
     void Awake()
@@ -20,23 +20,23 @@ public class blobPool : MonoBehaviour {
             //Then destroy this
             Destroy(gameObject);
     }
+
     // Use this for initialization
     void Start () {
-        for (int i = 0; i < 360; i += 10)
+        //creates a list of possible positions our blobs can spawn at (in terms of degrees around a circle)
+        for (int i = 0; i < 360; i += 10) 
         {
             posPositions.Add(i);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
+    //adds a blob to blob pool
     public void addBlob (GameObject blob)
     {
         blobs.Add(blob);
     }
+
+    //gets a blob from blob pool
     public GameObject getBlob()
     {
         if (blobs.Count > 0)
@@ -49,6 +49,8 @@ public class blobPool : MonoBehaviour {
             return null;
         }
     }
+
+    //removes a blob from blob pool
     public void removeBlob()
     {
         if (blobs.Count > 0)
@@ -57,6 +59,8 @@ public class blobPool : MonoBehaviour {
         }
         
     }
+
+    //prints how many blobs are currently in blob pool
     void inactiveBlobs()
     {
         Debug.Log("inactive blobs: " + blobs.Count);

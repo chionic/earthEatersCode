@@ -5,17 +5,18 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class earth : MonoBehaviour {
-    public static int eatEarth =0;
-    public static int foodLeft;
-    public static earth instance = null;
-    public Text percentage;
-    public Text scoreText;
-    public int earthHealth = 100;
+    public static int eatEarth = 0; //how much health the earth has left - when it reaches 0 it's game over
+    public static int foodLeft; //how much of a resource is left in the mouse pointer
+    public static earth instance = null; //singleton instance accessor
+
+    public Text percentage; //on screen text
+    public Text scoreText; //on screen text
+    public int earthHealth = 100; //how much health the planet has left
     private float score = 0;
-    private SpriteRenderer earthSprite;
-    public Sprite[] earths;
-    public Text gameOver;
-    public GameObject next;
+    private SpriteRenderer earthSprite; //for changing what the earth looks like
+    public Sprite[] earths; //array of earth sprites to change what the earth looks like
+    public Text gameOver; //on screen text
+    public GameObject next; // on screen button
 
     //create a singleton pattern for the tiles function, makes it easy to call from anywhere
     void Awake()
@@ -30,19 +31,26 @@ public class earth : MonoBehaviour {
             //Then destroy this
             Destroy(gameObject);
     }
+
+    // Use this for initialization
     void Start()
     {
         earthSprite = this.GetComponent<SpriteRenderer>();
-        next.SetActive(false);
+        next.SetActive(false); //make the next button inactive
     }
+
+    //change the score 
     public void changeScore(float toAdd)
     {
         score += toAdd;
     }
+
+    //change the health of the planet
     public void healthChange(int amount)
     {
-        earthHealth -= amount;
-        percentage.text = earthHealth + "%";
+        earthHealth -= amount; //take away the amount of health specified
+        percentage.text = earthHealth + "%"; //print the remaining health on screen
+        //if the health of the earth reaches 0, end the game
         if (earthHealth <= 0)
         {
             soundManager.instance.PlayEffect(4);
@@ -53,6 +61,7 @@ public class earth : MonoBehaviour {
             next.SetActive(true);
             
         }
+        //change the planet sprite depending on how much health the earth has left
         else if (earthHealth <= 20)
         {
             earthSprite.sprite = earths[2];
@@ -71,16 +80,17 @@ public class earth : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        //add to the player score depending on how long they have survived
         score += 0.01f;
         if (earthHealth > 0)
         {
             scoreText.text = "Score " + (int)score;
         }
+        //if the player has no resources left in the mouse pointer, change the colour of the mouse pointer to white
         if (earth.foodLeft < 1)
         {
             colorTile.changeColour(Color.white);
         }
-
     }
 }
 

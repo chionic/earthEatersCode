@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class colorTile : MonoBehaviour {
-    private static mousePointer mp;
-    public static Color currColour = Color.red;
-    public static Color[] colours = new Color[] { Color.red, Color.green, new Color32(0,175,255,255) };
+    //change the colour of the mouse pointer
+    private static mousePointer mp; //the mouse pointer game object
+    public static Color currColour = Color.red; //current colour of the mouse pointer
+    public static Color[] colours = new Color[] { Color.red, Color.green, new Color32(0,175,255,255)}; //possible mouse pointer colours
 
+    //change the colour of the mouse pointer
     public static void changeColour(Color color)
     {
         mp = GameObject.FindGameObjectWithTag("mp").GetComponent<mousePointer>();
@@ -14,6 +16,7 @@ public class colorTile : MonoBehaviour {
         mp.changeMouseColour(color);
     }
 
+    //get the current colour of the mouse pointer
     public static Color getColour()
     {
         return currColour;

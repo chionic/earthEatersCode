@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class soundManager : MonoBehaviour {
 
-    public static AudioSource sfxSource; //source to play music from (when I get to it)
     public static soundManager instance = null; //singleton pattern
     public GameObject[] sounds; //array of sound effects
 
